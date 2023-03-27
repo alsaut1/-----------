@@ -37,7 +37,7 @@ let renderAds = function (data){
   ads.querySelector('.popup__text--capacity').textContent = data.offer.rooms + ' комнаты для ' + data.offer.guests + ' гостей';
   ads.querySelector('.popup__text--time').textContent = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
   keys.forEach(key => {
-    // eslint-disable-next-line no-empty
+
     if (fiaturesAdd.includes(key) ){
 
     } else
@@ -49,7 +49,12 @@ let renderAds = function (data){
 
   let adsPictures = ads.querySelector('.popup__photos');
   let tegPictures = adsPictures.querySelector('img');
- // console.log(tegPictures);
+  if (!data.offer.photos.length){
+    tegPictures.remove();
+
+  }  else {
+
+
   for (let i =0; i<data.offer.photos.length; i++){
     if(!i) {
       tegPictures.src = data.offer.photos[0];
@@ -59,11 +64,13 @@ let renderAds = function (data){
       adsPictures.appendChild(tegPicturesClone);
     }
   }
-
+  }
   let autorPictures = ads.querySelector('.popup__avatar');
   autorPictures.src  = autorPictures.src.replace(data.avatar);
 
 
   return ads;
 };
-console.log(renderAds (simularData[0]));
+let vzor = renderAds (simularData[0]);
+let otrisovka = document.querySelector('#map-canvas');
+otrisovka.appendChild(vzor);
