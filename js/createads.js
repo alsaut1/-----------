@@ -38,6 +38,7 @@ let renderAds = function (data){
   ads.querySelector('.popup__text--time').textContent = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
   keys.forEach(key => {
 
+    // eslint-disable-next-line no-empty
     if (fiaturesAdd.includes(key) ){
 
     } else
@@ -55,15 +56,15 @@ let renderAds = function (data){
   }  else {
 
 
-  for (let i =0; i<data.offer.photos.length; i++){
-    if(!i) {
-      tegPictures.src = data.offer.photos[0];
-    } else {
-      let tegPicturesClone = tegPictures.cloneNode(true);
-      tegPicturesClone.src = data.offer.photos[i];
-      adsPictures.appendChild(tegPicturesClone);
+    for (let i =0; i<data.offer.photos.length; i++){
+      if(!i) {
+        tegPictures.src = data.offer.photos[0];
+      } else {
+        let tegPicturesClone = tegPictures.cloneNode(true);
+        tegPicturesClone.src = data.offer.photos[i];
+        adsPictures.appendChild(tegPicturesClone);
+      }
     }
-  }
   }
   let autorPictures = ads.querySelector('.popup__avatar');
   autorPictures.src  = autorPictures.src.replace(data.avatar);
@@ -71,6 +72,8 @@ let renderAds = function (data){
 
   return ads;
 };
-let vzor = renderAds (simularData[0]);
-let otrisovka = document.querySelector('#map-canvas');
-otrisovka.appendChild(vzor);
+
+export {renderAds};
+//  let vzor = renderAds (simularData[0]);
+//  let otrisovka = document.querySelector('#map-canvas');
+//  otrisovka.appendChild(vzor);
