@@ -2,6 +2,11 @@ let typeHousing = document.getElementById('type');
 let inputPrice = document.getElementById('price');
 let timeOut = document.getElementById('timeout');
 let timeIn = document.getElementById('timein');
+let addresForm = document.getElementById('address');
+const rememberRooms = document.getElementById('room_number');
+const rememberHare = document.getElementById('capacity');
+
+
 typeHousing.addEventListener('change', function(){
   switch(this.value){
     case 'bungalow':
@@ -52,4 +57,22 @@ timeOut.addEventListener('change', function(){
       break;
   }
 
+});
+
+
+addresForm.addEventListener('invalid', () => {
+  addresForm.setCustomValidity('Долбоеб Адрес укажи на карте!');
+});
+
+const selectHare =  rememberHare.querySelectorAll('option');
+selectHare.forEach((hare) => {hare.disabled = true;});
+
+rememberRooms.addEventListener('change', function(){
+  selectHare.forEach((hare) => {
+    if(this.value >= hare.value){
+      hare.disabled = false;
+    } else {
+      hare.disabled = true;
+    }
+  });
 });

@@ -75,7 +75,7 @@ if( readyMap ){
   mainPinMarker.addTo(map);
   mainPinMarker.on('moveend', (evt) => {
     let koordinnats = (evt.target.getLatLng());
-    let koordinatStr = koordinnats.lat +' ' + koordinnats.lng
+    let koordinatStr = koordinnats.lat.toFixed(5) +' ' + koordinnats.lng.toFixed(5)
     addressForm.setAttribute('value', koordinatStr);
     addressForm.setAttribute('readonly', true);
 
