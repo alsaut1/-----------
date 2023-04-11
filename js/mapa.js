@@ -1,6 +1,6 @@
 import {simularData} from './data.js';
-// import './createads.js';
 import {renderAds} from'./createads.js';
+import {createFetch} from './serverconn.js';
 
 let readyMap = false;
 let loadMap;
@@ -81,33 +81,55 @@ if( readyMap ){
 
   });
 
-  simularData.forEach((chata) => {
-    let  lat =   chata.offer.location[0];
-    let  lng = chata.offer.location[1];
 
-    const marker = L.marker({
-      lat,
-      lng,
-    },
-    {
-      icon: ubytPinIcon,
 
-    },
 
-    );
 
-    marker.addTo(map)
-      .bindPopup(
-        renderAds(chata),
-        {
-          keepInView: true,
-        },
+  function stavimBody(data){
+
+    data.forEach((chata) => {
+
+      let  lat = chata.location.lat;
+      let  lng = chata.location.lng;
+
+
+      const marker = L.marker({
+        lat,
+        lng,
+      },
+      {
+        icon: ubytPinIcon,
+
+      },
+
       );
 
-  });
+      marker.addTo(map)
+        .bindPopup(
+         renderAds(chata),
+          {
+            keepInView: true,
+          },
+        );
+
+    });
+  }
 
 
+  const requestRealdata = createFetch(
+    (data) => {
+     // console.log(data[0].location.lng);
+    //  console.log(simularData[0]);
+      stavimBody(data);
+    },
+    (err) => {
+      console.log(err);
+    });
 
-  // console.log(simularData);
+  requestRealdata();
+
+
+  //stavimBody(simularData);
+  //console.log(simularData);
 
 }

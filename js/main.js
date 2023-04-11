@@ -5,5 +5,10 @@ import './mapa.js';
 
 
 
- //let vzor = renderAds (simularData[0]);
-//console.log(vzor);
+
+//stavimBody(simularData);
+//console.log(stavimBody);
+
+
+
+

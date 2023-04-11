@@ -5,12 +5,13 @@ let templAds = document.querySelector('#card').content;
 let contAds = templAds.querySelector('.popup');
 let listFeatures = {'wifi':'.popup__feature--wifi', 'dishwasher':'.popup__feature--dishwasher', 'parking':'.popup__feature--parking', 'washer':'.popup__feature--washer', 'elevator':'.popup__feature--elevator' , 'conditioner':'.popup__feature--conditioner'};
 const keys = Object.keys(listFeatures);
-//console.log(simularData);
+
 
 
 let renderAds = function (data){
   let ads = contAds.cloneNode(true);
   let fiaturesAdd = data.offer.features;
+  if (typeof fiaturesAdd  === 'undefined'){fiaturesAdd = ''};
   let featuresOutput = ads.querySelector('.popup__features');
 
 
@@ -36,20 +37,25 @@ let renderAds = function (data){
   ads.querySelector('.popup__type').textContent = type;
   ads.querySelector('.popup__text--capacity').textContent = data.offer.rooms + ' комнаты для ' + data.offer.guests + ' гостей';
   ads.querySelector('.popup__text--time').textContent = 'Заезд после ' + data.offer.checkin + ', выезд до ' + data.offer.checkout;
-  keys.forEach(key => {
 
-    // eslint-disable-next-line no-empty
-    if (fiaturesAdd.includes(key) ){
+
+  keys.forEach(key => {
+    if (fiaturesAdd.includes(key))
+    {
 
     } else
     {
       (featuresOutput.querySelector(listFeatures[key])).remove();
     }
   });
+
+
   ads.querySelector('.popup__description').textContent = data.offer.description;
 
   let adsPictures = ads.querySelector('.popup__photos');
   let tegPictures = adsPictures.querySelector('img');
+
+  if (typeof data.offer.photos  === 'undefined'){data.offer.photos = ''};
   if (!data.offer.photos.length){
     tegPictures.remove();
 
