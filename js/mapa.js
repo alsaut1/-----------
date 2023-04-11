@@ -1,6 +1,7 @@
 import {simularData} from './data.js';
 import {renderAds} from'./createads.js';
 import {createFetch} from './serverconn.js';
+import {showAlert} from './errpopup.js';
 
 let readyMap = false;
 let loadMap;
@@ -118,18 +119,12 @@ if( readyMap ){
 
   const requestRealdata = createFetch(
     (data) => {
-     // console.log(data[0].location.lng);
-    //  console.log(simularData[0]);
       stavimBody(data);
     },
     (err) => {
+      showAlert('Пизда пришла серваку твоему!');
       console.log(err);
     });
 
   requestRealdata();
-
-
-  //stavimBody(simularData);
-  //console.log(simularData);
-
 }
